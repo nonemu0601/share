@@ -1,0 +1,18 @@
+[Unit]
+Description= In-Network-Computing Collabo kafka Subscriver
+After=kafka.service
+StartLimitIntervalSec=30
+StartLimitBurst=3
+
+[Service]
+ExecStart=/usr/src/python3_venv/bin/python /usr/src/inc_collabo/inc_subscriver.py
+Restart=always
+Environment=PATH=/usr/bin:/usr/local/bin
+Environment=PYTHONPATH=/usr/lib/python3/dist-packages
+RestartSec=5
+StandardOutput=append:/var/log/inc-subscriber.log
+StandardError=append:/var/log/inc-subscriber.log
+WorkingDirectory=/usr/src/inc_collabo/
+
+[Install]
+WantedBy=multi-user.target
